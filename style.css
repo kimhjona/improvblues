@@ -1,6 +1,6 @@
 html {
-  font-size: 10px;
-  background: url('https://media.giphy.com/media/IW71LHYHgD4oU/giphy.gif');
+  font-size: 9px;
+  /*background: url('https://media.giphy.com/media/IW71LHYHgD4oU/giphy.gif');*/
   /*background-size: c;*/
 }
 
@@ -8,6 +8,25 @@ body,html {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-size: 30px;
+}
+
+.videos {
+  /*margin-left:auto;
+  margin-right:auto;*/
+  text-align: center;
+}
+
+.bottom {
+  font-size: 20px;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
 }
 
 .keys {
@@ -39,19 +58,6 @@ body,html {
   justify-content: center;
 }
 
-.piano-white {
-  border: .4rem solid black;
-  border-radius: .5rem;
-  /*margin: 1rem;*/
-  font-size: 1.5rem;
-  padding: 1rem .5rem;
-  transition: all .07s ease;
-  width: 5rem;
-  text-align: center;
-  color: black;
-  background: white;
-  text-shadow: 0 0 .2rem #ffc600;
-}
 
 .piano-black {
   border: .4rem solid black;
