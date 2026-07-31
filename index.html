@@ -9,13 +9,13 @@
 </head>
 <body>
 
-<div class='title'>
+<header class='title'>
   <h1>Welcome!</h1>
-  <div class='steps'>
-    <p>Step 1: Choose a video</p>
-    <p>Step 2: Use your keyboard to jam (or tap the keys)</p>
-  </div>
-</div>
+  <p class='steps'>
+    <span>Step 1: Choose a video</span>
+    <span>Step 2: Use your keyboard to jam (or tap the keys)</span>
+  </p>
+</header>
 
 <div class='videos'>
   <iframe width="400" height='120' src="https://www.youtube.com/embed/1Tu_oGYQN14" frameborder="0" allowfullscreen></iframe>
@@ -23,25 +23,21 @@
   <iframe width="400" height="120" src="https://www.youtube.com/embed/ZbIcZHuZrFw" frameborder="0" allowfullscreen></iframe>
 </div>
 
-<div class='scale-info'>
-  <h2>You're playing the <strong>E blues scale</strong></h2>
-  <p class='degrees'>E &nbsp;G &nbsp;A &nbsp;B&#9837; &nbsp;B &nbsp;D</p>
-  <ul class='legend'>
-    <li><span class='swatch swatch-root'></span> E is home. Land on it to resolve a phrase.</li>
-    <li><span class='swatch swatch-blue'></span> B&#9837; is the blue note. Pass through it, don't sit on it.</li>
-  </ul>
-  <p class='hint'>Pitch rises as you go up and to the right, same as your keyboard.</p>
+<p class='scale-line'>
+  You're playing the <strong>E blues scale</strong>
+  <span class='degrees'>E &nbsp;G &nbsp;A &nbsp;B&#9837; &nbsp;B &nbsp;D</span>
+</p>
+
+<div class='stage'>
+  <div id='keyboard' class='keyboard' role='group' aria-label='E blues scale keyboard'></div>
+  <p id='status' class='status' role='status'>Loading sounds&hellip;</p>
 </div>
 
-<div id='keyboard' class='keyboard' role='group' aria-label='E blues scale keyboard'></div>
-
-<p id='status' class='status' role='status'>Loading sounds&hellip;</p>
-
-<p class='small-font title'>If you're not sure how to play, here's a <a href='https://www.youtube.com/watch?v=ycG2pkLpXIo'>demo</a>.</p>
-
-<div class='bottom'>
-  Created by <a href='https://www.jona.kim' target="_blank" rel="noopener">Jon Kim</a>
-</div>
+<footer class='notes'>
+  <span><i class='swatch swatch-root'></i> E is home. Land on it to resolve a phrase.</span>
+  <span><i class='swatch swatch-blue'></i> B&#9837; is the blue note. Pass through it, don't sit on it.</span>
+  <span>Pitch rises up and to the right, same as your keyboard.</span>
+</footer>
 
 <script>
 (() => {
@@ -54,34 +50,34 @@
   const ROWS = [
     [
       ['KeyQ', 'Q', 'G',  '♭3', '047'],
-      ['KeyW', 'W', 'A',  '4',       '049'],
+      ['KeyW', 'W', 'A',  '4',  '049'],
       ['KeyE', 'E', 'B♭', '♭5', '050'],
-      ['KeyR', 'R', 'B',  '5',       '051'],
+      ['KeyR', 'R', 'B',  '5',  '051'],
       ['KeyT', 'T', 'D',  '♭7', '054'],
-      ['KeyY', 'Y', 'E',  '1',       '056'],
+      ['KeyY', 'Y', 'E',  '1',  '056'],
       ['KeyU', 'U', 'G',  '♭3', '059'],
-      ['KeyI', 'I', 'A',  '4',       '061'],
+      ['KeyI', 'I', 'A',  '4',  '061'],
       ['KeyO', 'O', 'B♭', '♭5', '062'],
-      ['KeyP', 'P', 'B',  '5',       '063'],
+      ['KeyP', 'P', 'B',  '5',  '063'],
     ],
     [
-      ['KeyA', 'A', 'B',  '5',       '027'],
+      ['KeyA', 'A', 'B',  '5',  '027'],
       ['KeyS', 'S', 'D',  '♭7', '030'],
-      ['KeyD', 'D', 'E',  '1',       '032'],
+      ['KeyD', 'D', 'E',  '1',  '032'],
       ['KeyF', 'F', 'G',  '♭3', '035'],
-      ['KeyG', 'G', 'A',  '4',       '037'],
+      ['KeyG', 'G', 'A',  '4',  '037'],
       ['KeyH', 'H', 'B♭', '♭5', '038'],
-      ['KeyJ', 'J', 'B',  '5',       '039'],
+      ['KeyJ', 'J', 'B',  '5',  '039'],
       ['KeyK', 'K', 'D',  '♭7', '042'],
-      ['KeyL', 'L', 'E',  '1',       '044'],
+      ['KeyL', 'L', 'E',  '1',  '044'],
     ],
     [
       ['KeyZ', 'Z', 'B♭', '♭5', '014'],
-      ['KeyX', 'X', 'B',  '5',       '015'],
+      ['KeyX', 'X', 'B',  '5',  '015'],
       ['KeyC', 'C', 'D',  '♭7', '018'],
-      ['KeyV', 'V', 'E',  '1',       '020'],
+      ['KeyV', 'V', 'E',  '1',  '020'],
       ['KeyB', 'B', 'G',  '♭3', '023'],
-      ['KeyN', 'N', 'A',  '4',       '025'],
+      ['KeyN', 'N', 'A',  '4',  '025'],
       ['KeyM', 'M', 'B♭', '♭5', '026'],
     ],
   ];
@@ -146,7 +142,6 @@
       .then((buffer) => buffers.set(file, buffer))
   )).then(() => {
     document.body.classList.add('ready');
-    status.textContent = 'Ready. Play.';
   }).catch((err) => {
     console.error(err);
     status.textContent = 'Some sounds failed to load. Try reloading the page.';
@@ -240,7 +235,7 @@
     const el = event.target.closest('.key');
     if (!el) return;
     event.preventDefault();
-    // Touch pointers are captured by default, which would suppress pointerenter
+    // Touch pointers are captured by default, which would suppress pointerover
     // on the neighbours and kill sliding across the keys.
     if (el.hasPointerCapture && el.hasPointerCapture(event.pointerId)) {
       el.releasePointerCapture(event.pointerId);

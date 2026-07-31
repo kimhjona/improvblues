@@ -1,7 +1,8 @@
 :root {
   --gold: #ffc600;
   --blue: #4aa8ff;
-  --key: clamp(28px, 7.4vw, 62px);
+  /* Sized off both axes so the whole thing stays on one screen. */
+  --key: clamp(26px, min(7.4vw, 7.5vh), 62px);
   --gap: clamp(3px, 0.7vw, 8px);
   --step: calc(var(--key) + var(--gap));
 }
@@ -13,90 +14,86 @@ html, body {
 }
 
 body {
-  padding: 0 12px 40px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 0 12px 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
+
+/* ---------- header ---------- */
 
 .title {
   text-align: center;
+  flex: none;
 }
 
 h1 {
-  font-size: clamp(32px, 7vw, 56px);
-  margin: 24px 0 8px;
+  font-size: clamp(22px, 4.4vh, 40px);
+  margin: clamp(8px, 1.6vh, 20px) 0 clamp(4px, 0.8vh, 10px);
 }
 
-.steps p {
-  font-size: clamp(15px, 3.2vw, 22px);
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 28px;
+  font-size: clamp(14px, 1.9vh, 18px);
   font-weight: bold;
-  margin: 6px 0;
-}
-
-.small-font {
-  font-size: 16px;
+  margin: 0;
 }
 
 /* ---------- backing tracks ---------- */
 
+/* One row always: on a narrow screen this scrolls sideways rather than
+   stacking, which would push the keyboard off the bottom of the page. */
 .videos {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  justify-content: safe center;
   gap: 8px;
-  margin: 20px 0;
+  margin: clamp(8px, 1.6vh, 18px) 0;
+  padding-bottom: 2px;
+  flex: none;
 }
 
 .videos iframe {
-  max-width: 100%;
+  flex: 0 0 auto;
+  width: min(400px, 78vw);
+  height: 120px;
   border: 0;
+  scroll-snap-align: center;
 }
 
 /* ---------- what you're playing ---------- */
 
-.scale-info {
+.scale-line {
   text-align: center;
-  margin: 28px auto 18px;
-  max-width: 620px;
-}
-
-.scale-info h2 {
-  font-size: clamp(17px, 3.6vw, 24px);
-  font-weight: normal;
-  margin: 0 0 4px;
+  font-size: clamp(14px, 1.9vh, 18px);
+  margin: 0 0 clamp(6px, 1.2vh, 14px);
+  flex: none;
 }
 
 .degrees {
-  font-size: clamp(18px, 4vw, 26px);
-  letter-spacing: 0.08em;
-  margin: 0 0 14px;
-}
-
-.legend {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 10px;
-  font-size: 15px;
-  line-height: 1.7;
-}
-
-.swatch {
   display: inline-block;
-  width: 11px;
-  height: 11px;
-  border-radius: 3px;
-  margin-right: 6px;
-  vertical-align: baseline;
-}
-
-.swatch-root { background: var(--gold); }
-.swatch-blue { background: var(--blue); }
-
-.hint {
-  font-size: 14px;
-  color: #666;
-  margin: 0;
+  font-size: clamp(15px, 2.1vh, 20px);
+  letter-spacing: 0.08em;
+  margin-left: 10px;
 }
 
 /* ---------- the keyboard ---------- */
+
+.stage {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
 
 .keyboard {
   display: flex;
@@ -104,7 +101,6 @@ h1 {
   align-items: flex-start;
   width: max-content;
   max-width: 100%;
-  margin: 0 auto;
 }
 
 .key-row {
@@ -189,24 +185,46 @@ body:not(.ready) .key {
   cursor: progress;
 }
 
+/* Floated over the keyboard so it costs no vertical space. */
 .status {
-  text-align: center;
-  font-size: 14px;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 13px;
   color: #666;
-  margin: 18px 0 24px;
-  min-height: 1.2em;
+  pointer-events: none;
 }
 
 body.ready .status {
-  visibility: hidden;
+  display: none;
 }
 
-.bottom {
-  font-size: 18px;
-  width: 100%;
+/* ---------- how to use the scale ---------- */
+
+.notes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px 20px;
+  font-size: clamp(12px, 1.6vh, 14px);
+  color: #555;
   text-align: center;
-  margin-top: 24px;
+  margin-top: clamp(6px, 1.2vh, 14px);
+  flex: none;
 }
+
+.swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-right: 4px;
+}
+
+.swatch-root { background: var(--gold); }
+.swatch-blue { background: var(--blue); }
 
 @media (prefers-reduced-motion: reduce) {
   .key { transition: box-shadow .07s ease, border-color .07s ease; }
