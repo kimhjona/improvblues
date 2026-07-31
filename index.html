@@ -130,6 +130,36 @@
   const buffers = new Map(); // file path -> AudioBuffer
   const voices = new Map();  // key code -> { src, gain, startedAt }
 
+  // iOS silences Web Audio when the ring/silent switch is on unless the page
+  // asks for a playback session. Supported from iOS 16.4.
+  function claimPlaybackSession() {
+    try {
+      if (navigator.audioSession) navigator.audioSession.type = 'playback';
+    } catch (e) { /* not supported */ }
+  }
+  claimPlaybackSession();
+
+  // Mobile browsers keep the context suspended until a gesture, and iOS only
+  // really wakes it if something is played from inside the gesture handler.
+  // This must run on the very first touch, before any check that could bail
+  // out early, or the whole page stays silent.
+  let unlocked = false;
+  function unlockAudio() {
+    if (unlocked) return;
+    unlocked = true;
+    claimPlaybackSession();
+    if (ctx.state === 'suspended') ctx.resume();
+    const silent = ctx.createBufferSource();
+    silent.buffer = ctx.createBuffer(1, 1, ctx.sampleRate);
+    silent.connect(ctx.destination);
+    silent.start(0);
+  }
+  // Capture phase, so this runs before the key handlers rather than after them.
+  const unlockOpts = { capture: true, passive: true };
+  document.addEventListener('touchstart', unlockAudio, unlockOpts);
+  document.addEventListener('pointerdown', unlockAudio, unlockOpts);
+  document.addEventListener('keydown', unlockAudio, unlockOpts);
+
   const files = [...new Set([...byCode.values()].map((el) => el.dataset.file))];
 
   Promise.all(files.map((file) =>

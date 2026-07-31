@@ -226,6 +226,51 @@ body.ready .status {
 .swatch-root { background: var(--gold); }
 .swatch-blue { background: var(--blue); }
 
+/* ---------- phones ---------- */
+
+/* Same staggered QWERTY shape, but the keys become tall boxes: width is capped
+   by having to fit ten across, so the tap target has to grow downwards. The
+   letters shrink to a hint, since there is no physical keyboard to match them
+   to, and the note name becomes the label you actually aim at. */
+@media (max-width: 700px) {
+  :root {
+    --gap: 3px;
+    --key: min(calc((100vw - 26px - 9 * 3px) / 10), 46px);
+  }
+
+  .key {
+    height: clamp(48px, 12vh, 104px);
+    border-radius: 10px;
+    gap: 1px;
+    -webkit-touch-callout: none;
+  }
+
+  .key .letter {
+    font-size: 10px;
+    line-height: 1.1;
+    color: #7d7d7d;
+    font-weight: normal;
+  }
+
+  .key .note {
+    font-size: calc(var(--key) * 0.52);
+    color: #fff;
+  }
+
+  .key .degree {
+    display: none;
+  }
+
+  .key.playing {
+    transform: scale(1.06);
+  }
+
+  .notes {
+    gap: 1px 14px;
+    line-height: 1.35;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .key { transition: box-shadow .07s ease, border-color .07s ease; }
   .key.playing { transform: none; }
