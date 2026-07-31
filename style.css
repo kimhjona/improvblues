@@ -1,107 +1,214 @@
-html {
-  font-size: 9px;
-  /*background: url('https://media.giphy.com/media/IW71LHYHgD4oU/giphy.gif');*/
-  /*background-size: c;*/
+:root {
+  --gold: #ffc600;
+  --blue: #4aa8ff;
+  --key: clamp(28px, 7.4vw, 62px);
+  --gap: clamp(3px, 0.7vw, 8px);
+  --step: calc(var(--key) + var(--gap));
 }
 
-body,html {
+html, body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
 
+body {
+  padding: 0 12px 40px;
+}
+
 .title {
   text-align: center;
-  font-size: 30px;
+}
+
+h1 {
+  font-size: clamp(32px, 7vw, 56px);
+  margin: 24px 0 8px;
+}
+
+.steps p {
+  font-size: clamp(15px, 3.2vw, 22px);
+  font-weight: bold;
+  margin: 6px 0;
 }
 
 .small-font {
-  font-size: 18px;
+  font-size: 16px;
 }
+
+/* ---------- backing tracks ---------- */
 
 .videos {
-  /*margin-left:auto;
-  margin-right:auto;*/
-  text-align: center;
-}
-
-.bottom {
-  font-size: 20px;
-  /*position: absolute;*/
-  bottom: 10px;
-  width: 100%;
-  text-align: center;
-}
-
-.keys {
   display: flex;
-  flex: 1;
-  /*min-height: 100vh;*/
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
 }
 
-.key {
-  border: .4rem solid black;
-  border-radius: .5rem;
-  margin: 1rem;
-  font-size: 1.5rem;
-  padding: 1rem .5rem;
-  transition: all .07s ease;
-  width: 10rem;
-  text-align: center;
-  color: white;
-  background: rgba(0,0,0,0.8);
-  text-shadow: 0 0 .5rem black;
+.videos iframe {
+  max-width: 100%;
+  border: 0;
 }
+
+/* ---------- what you're playing ---------- */
+
+.scale-info {
+  text-align: center;
+  margin: 28px auto 18px;
+  max-width: 620px;
+}
+
+.scale-info h2 {
+  font-size: clamp(17px, 3.6vw, 24px);
+  font-weight: normal;
+  margin: 0 0 4px;
+}
+
+.degrees {
+  font-size: clamp(18px, 4vw, 26px);
+  letter-spacing: 0.08em;
+  margin: 0 0 14px;
+}
+
+.legend {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.swatch {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  margin-right: 6px;
+  vertical-align: baseline;
+}
+
+.swatch-root { background: var(--gold); }
+.swatch-blue { background: var(--blue); }
+
+.hint {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+/* ---------- the keyboard ---------- */
 
 .keyboard {
   display: flex;
-  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.key-row {
+  display: flex;
+  gap: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+/* Staggered like a real keyboard, so the layout matches what's under your hands. */
+.key-row-1 { padding-left: calc(var(--step) * 0.5); }
+.key-row-2 { padding-left: calc(var(--step) * 1.2); }
+
+.key {
+  width: var(--key);
+  height: calc(var(--key) * 1.5);
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 2px;
+
+  font-family: inherit;
+  background: #111;
+  color: #fff;
+  border: 2px solid #111;
+  border-radius: 8px;
+  padding: 0;
+
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .07s ease, box-shadow .07s ease, border-color .07s ease;
 }
 
-
-.piano-black {
-  border: .4rem solid black;
-  border-radius: .5rem;
-  /*margin: 1rem;*/
-  font-size: 1.5rem;
-  padding: 1rem .5rem;
-  transition: all .07s ease;
-  width: 5rem;
-  text-align: center;
-  color: white;
-  background: black;
-  text-shadow: 0 0 .5rem black;
+.key .letter {
+  font-size: calc(var(--key) * 0.46);
+  line-height: 1;
 }
 
-.playing {
+.key .note {
+  font-size: calc(var(--key) * 0.24);
+  line-height: 1;
+  color: #9a9a9a;
+}
+
+.key .degree {
+  font-size: calc(var(--key) * 0.2);
+  line-height: 1;
+  color: #6a6a6a;
+}
+
+.key.is-root {
+  border-color: var(--gold);
+}
+
+.key.is-root .note,
+.key.is-root .degree {
+  color: var(--gold);
+}
+
+.key.is-blue .note,
+.key.is-blue .degree {
+  color: var(--blue);
+}
+
+.key:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.key.playing {
   transform: scale(1.1);
-  border-color: #ffc600;
-  box-shadow: 0 0 1rem #ffc600;
+  border-color: var(--gold);
+  box-shadow: 0 0 1rem var(--gold);
 }
 
-kbd {
-  display: block;
-  font-size: 4rem;
+/* Keys are inert until the samples have decoded. */
+body:not(.ready) .key {
+  opacity: .55;
+  cursor: progress;
 }
 
-.sound {
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: .1rem;
-  color: #ffc600; 
+.status {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin: 18px 0 24px;
+  min-height: 1.2em;
 }
 
-.white {
-  font-size: 1.35rem;
-  font-style: bold;
-  color: black;
-  text-shadow: none;
+body.ready .status {
+  visibility: hidden;
 }
 
-.black {
-  font-style: bold;
+.bottom {
+  font-size: 18px;
+  width: 100%;
+  text-align: center;
+  margin-top: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key { transition: box-shadow .07s ease, border-color .07s ease; }
+  .key.playing { transform: none; }
 }

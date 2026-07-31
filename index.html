@@ -2,17 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Blues Improv</title>
+  <meta name="description" content="Jam over a blues backing track in E. Play the E blues scale with your computer keyboard, or tap the keys on a phone.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class='title'>
   <h1>Welcome!</h1>
-  <h4>
+  <div class='steps'>
     <p>Step 1: Choose a video</p>
-    <p>Step 2: Use your keyboard to jam!</p>
-  </h4>
+    <p>Step 2: Use your keyboard to jam (or tap the keys)</p>
+  </div>
 </div>
 
 <div class='videos'>
@@ -21,200 +23,251 @@
   <iframe width="400" height="120" src="https://www.youtube.com/embed/ZbIcZHuZrFw" frameborder="0" allowfullscreen></iframe>
 </div>
 
-<p></p>
-<div class='keyboard'>
-  <div data-key="81" class="piano-black">
-    <kbd>Q</kbd>
-    <span class="sound">B♭</span>
-  </div>
-  <div data-key="87" class="piano-black">
-    <kbd>W</kbd>
-    <span class="sound">B</span>
-  </div>
-  <div data-key="69" class="piano-black">
-    <kbd>E</kbd>
-    <span class="sound">D</span>
-  </div>
-  <div data-key="82" class="piano-black">
-    <kbd>R</kbd>
-    <span class="sound">E</span>
-  </div>
-  <div data-key="84" class="piano-black">
-    <kbd>T</kbd>
-    <span class="sound">G</span>
-  </div>
-  <div data-key="89" class="piano-black">
-    <kbd>Y</kbd>
-    <span class="sound">A</span>
-  </div>
-  <div data-key="85" class="piano-black">
-    <kbd>U</kbd>
-    <span class="sound">B♭</span>
-  </div>
-  <div data-key="73" class="piano-black">
-    <kbd>I</kbd>
-    <span class="sound">B</span>
-  </div>
-  <div data-key="79" class="piano-black">
-    <kbd>O</kbd>
-    <span class="sound">D</span>
-  </div>
-  <div data-key="80" class="piano-black">
-    <kbd>P</kbd>
-    <span class="sound">E</span>
-  </div>
+<div class='scale-info'>
+  <h2>You're playing the <strong>E blues scale</strong></h2>
+  <p class='degrees'>E &nbsp;G &nbsp;A &nbsp;B&#9837; &nbsp;B &nbsp;D</p>
+  <ul class='legend'>
+    <li><span class='swatch swatch-root'></span> E is home. Land on it to resolve a phrase.</li>
+    <li><span class='swatch swatch-blue'></span> B&#9837; is the blue note. Pass through it, don't sit on it.</li>
+  </ul>
+  <p class='hint'>Pitch rises as you go up and to the right, same as your keyboard.</p>
 </div>
 
-<p></p>
-<div class='keyboard'>
-  <div data-key="65" class="piano-black">
-    <kbd>A</kbd>
-    <span class="sound">G</span>
-  </div>
-  <div data-key="83" class="piano-black">
-    <kbd>S</kbd>
-    <span class="sound">A</span>
-  </div>
-  <div data-key="68" class="piano-black">
-    <kbd>D</kbd>
-    <span class="sound">B♭</span>
-  </div>
-  <div data-key="70" class="piano-black">
-    <kbd>F</kbd>
-    <span class="sound">B</span>
-  </div>
-  <div data-key="71" class="piano-black">
-    <kbd>G</kbd>
-    <span class="sound">D</span>
-  </div>
-  <div data-key="72" class="piano-black">
-    <kbd>H</kbd>
-    <span class="sound">E</span>
-  </div>
-  <div data-key="74" class="piano-black">
-    <kbd>J</kbd>
-    <span class="sound">G</span>
-  </div>
-  <div data-key="75" class="piano-black">
-    <kbd>K</kbd>
-    <span class="sound">A</span>
-  </div>
-  <div data-key="76" class="piano-black">
-    <kbd>L</kbd>
-    <span class="sound">B♭</span>
-  </div>
-</div>
+<div id='keyboard' class='keyboard' role='group' aria-label='E blues scale keyboard'></div>
 
-<p></p>
-
-<div class='keyboard'>
-  <div data-key="90" class="piano-black">
-    <kbd>Z</kbd>
-    <span class="sound">B</span>
-  </div>
-  <div data-key="88" class="piano-black">
-    <kbd>X</kbd>
-    <span class="sound">D</span>
-  </div>
-  <div data-key="67" class="piano-black">
-    <kbd>C</kbd>
-    <span class="sound">E</span>
-  </div>
-  <div data-key="86" class="piano-black">
-    <kbd>V</kbd>
-    <span class="sound">G</span>
-  </div>
-  <div data-key="66" class="piano-black">
-    <kbd>B</kbd>
-    <span class="sound">A</span>
-  </div>
-  <div data-key="78" class="piano-black">
-    <kbd>N</kbd>
-    <span class="sound">B♭</span>
-  </div>
-  <div data-key="77" class="piano-black">
-    <kbd>M</kbd>
-    <span class="sound">B</span>
-  </div>
-</div>
-
-<br></br>
-<p class='small-font title'>Not working? Download <a href='https://www.google.com/chrome/' target="_blank">Chrome</a> or <a href='https://www.mozilla.org/firefox' target="_blank">Firefox!</a> and try again!</p>
+<p id='status' class='status' role='status'>Loading sounds&hellip;</p>
 
 <p class='small-font title'>If you're not sure how to play, here's a <a href='https://www.youtube.com/watch?v=ycG2pkLpXIo'>demo</a>.</p>
 
-
-<br></br><br></br>
 <div class='bottom'>
-  Created by <a href='https://www.jona.kim' target="_blank">Jon Kim</a>
+  Created by <a href='https://www.jona.kim' target="_blank" rel="noopener">Jon Kim</a>
 </div>
 
-
-  <audio data-key="81" src="sounds/014.wav"></audio>
-  <audio data-key="87" src="sounds/015.wav"></audio>
-  <audio data-key="69" src="sounds/018.wav"></audio>
-  <audio data-key="82" src="sounds/020.wav"></audio>
-  <audio data-key="84" src="sounds/023.wav"></audio>
-  <audio data-key="89" src="sounds/025.wav"></audio>
-  <audio data-key="85" src="sounds/026.wav"></audio>
-  <audio data-key="73" src="sounds/027.wav"></audio>
-  <audio data-key="79" src="sounds/030.wav"></audio>
-
-  <audio data-key="80" src="sounds/032.wav"></audio>
-  <audio data-key="65" src="sounds/035.wav"></audio>
-  <audio data-key="83" src="sounds/037.wav"></audio>
-  <audio data-key="68" src="sounds/038.wav"></audio>
-  <audio data-key="70" src="sounds/039.wav"></audio>
-  <audio data-key="71" src="sounds/042.wav"></audio>
-  <audio data-key="72" src="sounds/044.wav"></audio>
-  <audio data-key="74" src="sounds/047.wav"></audio>
-  <audio data-key="75" src="sounds/049.wav"></audio>
-  <audio data-key="76" src="sounds/050.wav"></audio>
-
-  <audio data-key="90" src="sounds/051.wav"></audio>
-  <audio data-key="88" src="sounds/054.wav"></audio>
-  <audio data-key="67" src="sounds/056.wav"></audio>
-  <audio data-key="86" src="sounds/059.wav"></audio>
-  <audio data-key="66" src="sounds/061.wav"></audio>
-  <audio data-key="78" src="sounds/062.wav"></audio>
-  <audio data-key="77" src="sounds/063.wav"></audio>
-
-
 <script>
+(() => {
+  'use strict';
+
+  // One row per physical keyboard row, ordered top to bottom.
+  // Pitch ascends left to right and bottom to top, so the layout matches a piano:
+  // ZXCV is the low register, QWERTY the high one.
+  // Scale degrees of the E blues scale: E=1, G=b3, A=4, Bb=b5, B=5, D=b7.
+  const ROWS = [
+    [
+      ['KeyQ', 'Q', 'G',  '♭3', '047'],
+      ['KeyW', 'W', 'A',  '4',       '049'],
+      ['KeyE', 'E', 'B♭', '♭5', '050'],
+      ['KeyR', 'R', 'B',  '5',       '051'],
+      ['KeyT', 'T', 'D',  '♭7', '054'],
+      ['KeyY', 'Y', 'E',  '1',       '056'],
+      ['KeyU', 'U', 'G',  '♭3', '059'],
+      ['KeyI', 'I', 'A',  '4',       '061'],
+      ['KeyO', 'O', 'B♭', '♭5', '062'],
+      ['KeyP', 'P', 'B',  '5',       '063'],
+    ],
+    [
+      ['KeyA', 'A', 'B',  '5',       '027'],
+      ['KeyS', 'S', 'D',  '♭7', '030'],
+      ['KeyD', 'D', 'E',  '1',       '032'],
+      ['KeyF', 'F', 'G',  '♭3', '035'],
+      ['KeyG', 'G', 'A',  '4',       '037'],
+      ['KeyH', 'H', 'B♭', '♭5', '038'],
+      ['KeyJ', 'J', 'B',  '5',       '039'],
+      ['KeyK', 'K', 'D',  '♭7', '042'],
+      ['KeyL', 'L', 'E',  '1',       '044'],
+    ],
+    [
+      ['KeyZ', 'Z', 'B♭', '♭5', '014'],
+      ['KeyX', 'X', 'B',  '5',       '015'],
+      ['KeyC', 'C', 'D',  '♭7', '018'],
+      ['KeyV', 'V', 'E',  '1',       '020'],
+      ['KeyB', 'B', 'G',  '♭3', '023'],
+      ['KeyN', 'N', 'A',  '4',       '025'],
+      ['KeyM', 'M', 'B♭', '♭5', '026'],
+    ],
+  ];
+
+  const MIN_NOTE = 0.18; // seconds a note sounds even on the fastest tap
+  const RELEASE  = 0.30; // fade-out after the key comes up
+  const FLASH_MS = 90;   // minimum time a key stays lit, so quick taps still show
+
+  // ---------- build the keyboard ----------
+
+  const keyboard = document.getElementById('keyboard');
+  const status = document.getElementById('status');
+  const byCode = new Map();
+
+  ROWS.forEach((row, i) => {
+    const rowEl = document.createElement('div');
+    rowEl.className = 'key-row key-row-' + i;
+    row.forEach(([code, letter, note, degree, file]) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'key';
+      if (degree === '1') btn.classList.add('is-root');
+      if (degree === '♭5') btn.classList.add('is-blue');
+      btn.dataset.code = code;
+      btn.dataset.file = 'sounds/' + file + '.wav';
+      btn.setAttribute('aria-label', note + ', scale degree ' + degree + ', keyboard key ' + letter);
+      btn.innerHTML =
+        '<span class="letter">' + letter + '</span>' +
+        '<span class="note">' + note + '</span>' +
+        '<span class="degree">' + degree + '</span>';
+      rowEl.appendChild(btn);
+      byCode.set(code, btn);
+    });
+    keyboard.appendChild(rowEl);
+  });
+
+  // ---------- audio ----------
+
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) {
+    status.textContent = 'This browser has no Web Audio support, so the keys will not make sound.';
+    return;
+  }
+
+  const ctx = new Ctx();
+  const master = ctx.createGain();
+  master.gain.value = 0.8;
+  master.connect(ctx.destination);
+
+  const buffers = new Map(); // file path -> AudioBuffer
+  const voices = new Map();  // key code -> { src, gain, startedAt }
+
+  const files = [...new Set([...byCode.values()].map((el) => el.dataset.file))];
+
+  Promise.all(files.map((file) =>
+    fetch(file)
+      .then((res) => {
+        if (!res.ok) throw new Error(res.status + ' ' + file);
+        return res.arrayBuffer();
+      })
+      .then((data) => ctx.decodeAudioData(data))
+      .then((buffer) => buffers.set(file, buffer))
+  )).then(() => {
+    document.body.classList.add('ready');
+    status.textContent = 'Ready. Play.';
+  }).catch((err) => {
+    console.error(err);
+    status.textContent = 'Some sounds failed to load. Try reloading the page.';
+  });
+
+  function press(code) {
+    const el = byCode.get(code);
+    if (!el) return;
+    const buffer = buffers.get(el.dataset.file);
+    if (!buffer) return;
+
+    // Browsers start the audio context suspended until the user interacts.
+    if (ctx.state === 'suspended') ctx.resume();
+
+    // Retriggering a held key releases the old voice instead of cutting it dead.
+    release(code);
+
+    const src = ctx.createBufferSource();
+    src.buffer = buffer;
+    const gain = ctx.createGain();
+    gain.gain.value = 1;
+    src.connect(gain).connect(master);
+    src.start();
+
+    voices.set(code, { src: src, gain: gain, startedAt: ctx.currentTime });
+
+    el.classList.add('playing');
+    el.dataset.litAt = String(performance.now());
+  }
+
+  function release(code) {
+    const voice = voices.get(code);
+    if (voice) {
+      voices.delete(code);
+      const at = Math.max(ctx.currentTime, voice.startedAt + MIN_NOTE);
+      voice.gain.gain.setValueAtTime(1, at);
+      voice.gain.gain.linearRampToValueAtTime(0.0001, at + RELEASE);
+      try { voice.src.stop(at + RELEASE + 0.02); } catch (e) { /* already stopped */ }
+    }
+
+    const el = byCode.get(code);
+    if (!el || !el.classList.contains('playing')) return;
+    const held = performance.now() - Number(el.dataset.litAt || 0);
+    if (held >= FLASH_MS) {
+      el.classList.remove('playing');
+    } else {
+      setTimeout(() => el.classList.remove('playing'), FLASH_MS - held);
+    }
+  }
+
+  function releaseAll() {
+    [...voices.keys()].forEach(release);
+  }
+
+  // ---------- computer keyboard ----------
 
   window.addEventListener('keydown', (event) => {
-    // console.log('keycode:', event.keyCode);
-    const audioFiles = document.querySelector(`audio[data-key="${event.keyCode}"`);
-    const key = document.querySelector(`div[data-key="${event.keyCode}"]`);
-    // console.log('audioFiles:', audioFiles);
-    // console.log('key:', key);
-    if (!audioFiles || !key) return;
-    audioFiles.currentTime = 0;
-    audioFiles.play();
-    // console.log('key:', key)
-    key.classList.add('playing');
-  })
-  
-  function removeTransition(input) {
-    if (input.propertyName !== 'transform') return;
-    this.classList.remove('playing');
+    if (event.metaKey || event.ctrlKey || event.altKey) return; // leave browser shortcuts alone
+    if (!byCode.has(event.code)) return;
+    event.preventDefault();
+    if (event.repeat) return; // key auto-repeat would machine-gun the sample
+    press(event.code);
+  });
+
+  window.addEventListener('keyup', (event) => {
+    if (!byCode.has(event.code)) return;
+    release(event.code);
+  });
+
+  window.addEventListener('blur', releaseAll);
+
+  // ---------- mouse and touch ----------
+
+  const pointers = new Map(); // pointerId -> key code
+
+  function pointerPress(id, el) {
+    const code = el.dataset.code;
+    if (pointers.get(id) === code) return;
+    if (pointers.has(id)) release(pointers.get(id));
+    pointers.set(id, code);
+    press(code);
   }
-  function removePianoWhite(input) {
-    if (input.propertyName !== 'transform') return;
-    this.classList.remove('playing');
-  }
-  function removePianoBlack(input) {
-    if (input.propertyName !== 'transform') return;
-    this.classList.remove('playing');
+
+  function pointerRelease(id) {
+    if (!pointers.has(id)) return;
+    release(pointers.get(id));
+    pointers.delete(id);
   }
 
-  const keysBlack = document.querySelectorAll('.piano-black');
-  keysBlack.forEach((key) => key.addEventListener('transitionend', removePianoBlack));
+  keyboard.addEventListener('pointerdown', (event) => {
+    const el = event.target.closest('.key');
+    if (!el) return;
+    event.preventDefault();
+    // Touch pointers are captured by default, which would suppress pointerenter
+    // on the neighbours and kill sliding across the keys.
+    if (el.hasPointerCapture && el.hasPointerCapture(event.pointerId)) {
+      el.releasePointerCapture(event.pointerId);
+    }
+    pointerPress(event.pointerId, el);
+  });
 
+  keyboard.addEventListener('pointerover', (event) => {
+    if (!pointers.has(event.pointerId)) return;
+    const el = event.target.closest('.key');
+    if (el) pointerPress(event.pointerId, el);
+  });
 
+  window.addEventListener('pointerup', (event) => pointerRelease(event.pointerId));
+  window.addEventListener('pointercancel', (event) => pointerRelease(event.pointerId));
 
+  // Enter or Space on a focused key. event.detail is 0 only for keyboard activation,
+  // so real clicks (already handled by pointerdown) do not double-trigger.
+  keyboard.addEventListener('click', (event) => {
+    if (event.detail !== 0) return;
+    const el = event.target.closest('.key');
+    if (!el) return;
+    press(el.dataset.code);
+    setTimeout(() => release(el.dataset.code), 250);
+  });
+})();
 </script>
-
 
 </body>
 </html>
